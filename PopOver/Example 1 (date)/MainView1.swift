@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct MainView1: View {
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     @State var graphicalDate = false
     @State var showPicker = false
