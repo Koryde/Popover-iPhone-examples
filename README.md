@@ -5,7 +5,6 @@
   <p align="center">
     Here you can find 2 examples of "popover" presentation on iPhone
     <br />
-    <a href="https://github.com/Koryde/Popover-iPhone-examples"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/github_username/repo_name">View Demo</a>
