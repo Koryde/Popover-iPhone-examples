@@ -30,11 +30,21 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li>
-      <a href="#code">Code</a>
+      <a href="#code-example-1">Code example n°1</a>
       <ul>
-        <li><a href="#step-1#">Step 1</a></li>
+        <li><a href="#step-1">Step 1</a></li>
+        <li><a href="#step-2">Step 2</a></li>
+        <li><a href="#step-3">Step 3</a></li>
       </ul>
     </li>
+    <li>
+      <a href="#code-example-2">Code example n°2</a>
+      <ul>
+        <li><a href="#step-1">Step 1</a></li>
+        <li><a href="#step-2">Step 2</a></li>
+      </ul>
+    </li>
+    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -64,7 +74,7 @@ First of all, I'm not going to explain every single line of code, but only the o
 
 ### Prerequisites
 
-Before continue I suggest you to learn the working process of NavigationView, List, Toolbar, Ternary Operator, If/Else Operator, @Binding and @State.
+Before continue I suggest you to learn the working process of NavigationView, Toolbar, Ternary Operator, If/Else Operator, @Binding and @State.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -80,143 +90,113 @@ This project contains two very different example; they're very different also in
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-## Code
-
-Now let's go deep in the code. First of all, let's create an extension View where we create a certain function..
+## Code example 1
 
 ### Step 1
 
-This is just an example of a viewbuilding, but of course you can do whatever you want of this view. Be creative!
-
-```Ruby
-import SwiftUI
-
-//Creating Extension for popover
+```Swift
 extension View{
-    
-    func toolBarPopover<Content: View>(show: Binding<Bool>,placement: Placement = .leading, 
-    @ViewBuilder content: @escaping ()->Content)->some View{
-        
-        self
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .overlay(
-                ZStack{
-                    if show.wrappedValue{
-                        content()
-                            .padding()
-                            .background(
-                                Color.white
-                                    .clipShape(Ex1ArrowShape(placement: placement))
-                            )
-                        
-//                        Shadows
-                            .shadow(color: Color.primary.opacity(0.05), radius: 5, x: 5, y: 5)
-                            .shadow(color: Color.primary.opacity(0.05), radius: 5, x: -5, y: -5)
-                            .padding(.horizontal,35)
-                        
-//                        Moving from top
-//                        Approx top Navigation Bar height
-                            .offset(y: 55)
-                            .offset(x: placement == .leading ? -20 : 20)
-                    }
-                },
-                alignment: placement == .leading ? .topLeading : .topTrailing)
-    }
-}
+		func toolBarPopover<Content: View>(show: Binding<Bool>,placement: Placement = .leading,
+                                       @ViewBuilder content: @escaping ()->Content)->some View{
+                               self
+                                     (...)
+                                          if show.wrappedValue{...}
 ```
+Let’s create a viewbuilder function where we create the view’s container we want to present.
 
 ### Step 2
 
+```Swift
+@State var show = false
+NavigationView{
+...
+}.toolbar{
+    ToolbarItem(placement: ."..."){
+          Button {
+                  withAnimation{
+                      show.toggle()
+                  }
+              } label: {
+                  Image(systemName: "...")
+                      .foregroundColor(."...")
+              }
+          }
+      }
+  }.toolBarPopover(show: $show, placement: ."..."){
+```
+Here it comes the core part, very important as very easy: just place “.toolBarPopover” at the end of the NavigationView and give the classic present binding (like modal view) to a button
 
+### Step 3
 
-```Ruby
-import SwiftUI
-
-struct MainView1: View {
-    
-    @State var graphicalDate = false
-    @State var showPicker = false
-    @State var show = false
-     
-    var body: some View {
-        
-        NavigationView{
-            
-            List{
-                
-                Toggle(isOn: $showPicker) {
-                    
-                    Text("Show Picker")
-                }
-                .toggleStyle(SwitchToggleStyle(tint: .orange))
-
-                
-                Toggle(isOn: $graphicalDate) {
-                    
-                    Text("Show Graphical Date")
-                }
-                .toggleStyle(SwitchToggleStyle(tint: .orange))
-            }
-            .navigationTitle("Example 1")
-            
-//          ToolBar
-            .toolbar{
-                ToolbarItem(placement: .navigationBarLeading){
-                    Button {
-                        withAnimation{
-                            show.toggle()
-                        }
-                    } label: {
-                        Image(systemName: "slider.horizontal.below.square.fill.and.square")
-                            .foregroundColor(.orange)
-                    }
-                }
-            }
-        }
-        .toolBarPopover(show: $show, placement: .leading){
-                        
-//            Showing dynamic usage
-            if showPicker{
-                
-                Picker(selection: .constant("")){
-                    
-                    ForEach(1...10, id: \.self){index in
-                        Text ("Example \(index)")
-                            .tag(index)
-                    }
-                    } label: {
-                        }
-                        .pickerStyle(.wheel)
-                        .applyTextColor(.orange)
-                        .background(Color(UIColor.systemBackground))
-
-                        
-            } else{
-                
-                if graphicalDate{
-                    
-//                  Popover View
-                    DatePicker("", selection: .constant(Date()))
-                    .datePickerStyle(.graphical)
-                    .accentColor(.orange)
-                    .background(Color(UIColor.systemBackground))
-
-                    
-                } else {
-                    //              Popover View
-                                    DatePicker("", selection: .constant(Date()))
-                                    .datePickerStyle(.compact)
-                                    .labelsHidden()
-                                    .accentColor(.orange)
-                                    .background(Color(UIColor.systemBackground))
-
-            }
-        }
-    }
+```Swift
+struct Ex1ArrowShape: Shape{
+  var placement: Placement
+  func path(in rect: CGRect) -> Path {
+  return Path { path in
+  let pt1 = CGPoint(x: 0, y: 0)
+  let pt2 = CGPoint(x: rect.width, y: 0)
+  let pt3 = CGPoint(x: rect.width, y: rect.height)
+  let pt4 = CGPoint(x: 0, y: rect.height)
+//  Drawing arcs with radius
+  path.move(to: pt4)
+  path.addArc(tangent1End: pt1, tangent2End: pt2, radius: 15)
+  path.addArc(tangent1End: pt2, tangent2End: pt3, radius: 15)
+  path.addArc(tangent1End: pt3, tangent2End: pt4, radius: 15)
+  path.addArc(tangent1End: pt4, tangent2End: pt1, radius: 15)
+//  Arrow
+  path.move(to: pt1)
+  path.addLine(to: CGPoint(x: placement == .leading ? 10 : rect.width-10, y: 0))
+  path.addLine(to: CGPoint(x: placement == .leading ? 15 : rect.width-15, y: 0))
+  path.addLine(to: CGPoint(x: placement == .leading ? 25 : rect.width-25, y: -15))
+  path.addLine(to: CGPoint(x: placement == .leading ? 40 : rect.width-40, y: 0))
+  }
   }
 }
 ```
+This is an example of container very similar to original iPad’s popover.
 
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Code example 2
+
+### Step 1
+
+```Swift
+@State var show = false
+VStack(alignment: ."...", spacing: "..."){
+	if self.show{
+	   PopoverButton()
+	        ...
+	}
+	Button(action: {
+	    withAnimation(."..."()){
+	        self.show.toggle()
+	    }  
+	})
+}
+```
+The second example is very easy to build, but also very easy to be destroyed by HIG
+
+
+### Step 2
+
+```Swift
+struct Ex2ArrowShape: Shape{
+    func path(in rect: CGRect) -> Path {
+        let center = rect.width / 2
+        return Path{ path in
+            path.move(to:  CGPoint(x: 0, y: 0))
+            path.addLine(to: CGPoint(x: rect.width, y: 0))
+            path.addLine(to: CGPoint(x: rect.width, y: rect.height-20))
+            path.addLine(to: CGPoint(x: center-15, y: rect.height-20))
+            path.addLine(to: CGPoint(x: center, y: rect.height-5))
+            path.addLine(to: CGPoint(x: center+15, y: rect.height-20))
+            path.addLine(to: CGPoint(x: 0, y: rect.height-20))
+        }
+    }
+}
+```
+Another example of container, this time builded for circle button.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -231,9 +211,10 @@ Don't forget to give the project a star! Thanks again!
 
 ## Contact
 
-###### Discord: Roberto D'Anna@5386
-###### Email: roberto.danna97@icloud.com
+**Discord**:  Roberto D'Anna@5386
 
-###### Project Link: [https://github.com/Koryde/Popover-iPhone-examples](https://github.com/Koryde/Popover-iPhone-examples)
+**Email**: [roberto.danna97@icloud.com](mailto:roberto.danna97@icloud.com)
+
+**Project Link**: [https://github.com/Koryde/Popover-iPhone-examples](https://github.com/Koryde/Popover-iPhone-examples)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
