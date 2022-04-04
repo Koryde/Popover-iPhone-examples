@@ -1,6 +1,6 @@
 <div id="top"></div>
 
-<h3 align="center"> Popover examples on iPhone</h3>
+# Popover examples on iPhone
 
   <p align="center">
   </p>
