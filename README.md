@@ -1,18 +1,17 @@
 <div id="top"></div>
 
-<h3 align="center">Popover examples on iPhone</h3>
+<h3 align="center"> Popover examples on iPhone</h3>
 
   <p align="center">
-    Here you can find 2 examples of "popover" presentation on iPhone
-    <br />
-    <br />
-    <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
-    ·
   </p>
 </div>
 
-
+<p align="center">
+<img width="300" height="650" src ="https://user-images.githubusercontent.com/94546744/161548450-f126b087-b8e7-4c0e-92dc-9266742595bc.gif">
+</p>
+<p align="center">
+	Here you can find 2 examples of "popover" presentation on iPhone
+</p>
 <details>
   <summary>Table of Contents</summary>
   <ol>
