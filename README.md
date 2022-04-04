@@ -211,7 +211,7 @@ Don't forget to give the project a star! Thanks again!
 
 ## Contact
 
-**Discord**:  Roberto D'Anna@5386
+**Discord**:  Roberto D'Anna#5386
 
 **Email**: [roberto.danna97@icloud.com](mailto:roberto.danna97@icloud.com)
 
