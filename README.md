@@ -21,12 +21,6 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-      </ul>
-    </li>
     <li><a href="#usage">Usage</a></li>
     <li>
       <a href="#code-example-1">Code example n°1</a>
@@ -62,18 +56,6 @@ I know that we have all follow this simply rules and if there's a rule of what f
 ### Built With
 
 * [SwiftUI](https://developer.apple.com/xcode/swiftui/)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-## Getting Started
-
-Let's start talking about the project now!
-First of all, I'm not going to explain every single line of code, but only the ones that are closely related to popover presentation.
-
-### Prerequisites
-
-Before continue I suggest you to learn the working process of NavigationView, Toolbar, Ternary Operator, If/Else Operator, @Binding and @State.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
