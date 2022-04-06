@@ -7,7 +7,7 @@
 </div>
 
 <p align="center">
-<img width="300" height="650" src ="https://user-images.githubusercontent.com/94546744/161548450-f126b087-b8e7-4c0e-92dc-9266742595bc.gif">
+<img width="250" height="550" src ="https://user-images.githubusercontent.com/94546744/161548450-f126b087-b8e7-4c0e-92dc-9266742595bc.gif">
 </p>
 <p align="center">
 	Here you can find 2 examples of "popover" presentation on iPhone
